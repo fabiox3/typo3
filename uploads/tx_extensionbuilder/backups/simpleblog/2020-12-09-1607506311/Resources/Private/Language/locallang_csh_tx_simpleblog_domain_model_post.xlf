@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2020-12-09T09:29:40Z" product-name="simpleblog">
+		<header/>
+		<body>
+			<trans-unit id="tx_simpleblog_domain_model_bloglisting">
+				<source>Simpleblog - Bloglisting</source>
+			</trans-unit>
+			<trans-unit id="tx_simpleblog_domain_model_bloglisting.description">
+				<source>This is the didactical example from the book \"TYPO£ Extbase\" by Patrick Lobacher</source>
+			</trans-unit>
+			<trans-unit id="title.description">
+				<source>title</source>
+			</trans-unit>
+			<trans-unit id="content.description">
+				<source>content</source>
+			</trans-unit>
+			<trans-unit id="postdate.description">
+				<source>postdate</source>
+			</trans-unit>
+			<trans-unit id="comments.description">
+				<source>comments</source>
+			</trans-unit>
+			<trans-unit id="author.description">
+				<source>author</source>
+			</trans-unit>
+			<trans-unit id="tags.description">
+				<source>tags</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

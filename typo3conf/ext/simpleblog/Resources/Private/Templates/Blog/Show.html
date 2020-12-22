@@ -1,0 +1,12 @@
+<h1>I miei Blog</h1>
+<div class="container">
+    <ul class="list-group">
+    <f:for each="{blogs}" as="blog">
+        <li class="list-group-item">
+            {blog.title}
+            <f:link.action action="display" arguments="{blog:blog}" class="btn btn-xs pull-right">MOSTRA</f:link.action>
+        </li>
+    </f:for>
+    </ul>
+    <f:link.action action="create" class="btn btn-primary">Crea un nuovo blog</f:link.action>
+</div>
