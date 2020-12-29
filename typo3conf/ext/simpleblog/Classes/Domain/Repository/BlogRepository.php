@@ -17,4 +17,12 @@ namespace Pluswerk\Simpleblog\Domain\Repository;
  */
 class BlogRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
+    public function findSearchForm($search)
+    {
+        $query = $this->createQuery();
+        $query->matching(
+            $query->like('title', '%' . $search . '%')
+        );
+        return $query->execute();
     }
+}

@@ -31,12 +31,17 @@ class BlogController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     }
 
     /**
-     * list action
+     * list action  
      * @return void
      */
     public function showAction()
     {
-        $this->view->assign('blogs', $this->blogRepository->findAll());
+        $search = '';
+        if( $this->request->hasArgument('search') ) {
+            $search = $this->request->getArgument('search');
+        }
+        $this->view->assign('blogs', $this->blogRepository->findSearchForm($search));
+        $this->view->assign('search', $search);
     }
 
     /**
@@ -64,6 +69,43 @@ class BlogController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      * @return void
      */
     public function displayAction(\Pluswerk\Simpleblog\Domain\Model\Blog $blog)
+    {
+        $this->view->assign('blog', $blog);
+    }
+
+    /**
+     * @param \Pluswerk\Simpleblog\Domain\Model\Blog $blog
+     * @return void
+     */
+    public function updateFormAction(\Pluswerk\Simpleblog\Domain\Model\Blog $blog)
+    {
+        $this->view->assign('blog', $blog);
+    }
+
+    /**
+     * @param \Pluswerk\Simpleblog\Domain\Model\Blog $blog
+     * @return void
+     */
+    public function updateAction(\Pluswerk\Simpleblog\Domain\Model\Blog $blog)
+    {
+        $this->blogRepository->update($blog);
+        $this->redirect('show');
+    }
+
+    /**
+     * @param \Pluswerk\Simpleblog\Domain\Model\Blog $blog
+     */
+    public function deleteAction(\Pluswerk\Simpleblog\Domain\Model\Blog $blog)
+    {
+        $this->blogRepository->remove($blog);
+        $this->redirect('show');
+    }
+
+    /**
+     * @param \Pluswerk\Simpleblog\Domain\Model\Blog $blog
+     * @return void
+     */
+    public function deleteConfirmAction(\Pluswerk\Simpleblog\Domain\Model\Blog $blog)
     {
         $this->view->assign('blog', $blog);
     }

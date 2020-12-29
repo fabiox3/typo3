@@ -1,0 +1,14 @@
+<f:layout name="default" />
+<f:section name="content">
+    <div class="container-fluid">
+        <h1>Eliminare il blog?</h1>
+        Vuoi veramente cancellare il blog con il titolo <strong>{blog.title}</strong>?
+        <br /><br />
+        <f:link.action action="show" class="btn btn-danger">
+            No, non eliminare!
+        </f:link.action>
+        <f:link.action action="delete" class="btn btn-success" arguments="{blog:blog}">
+            Si, certo, eliminalo!
+        </f:link.action>
+    </div>
+</f:section>

@@ -1,14 +1,6 @@
-<div class="container">
-    <h1>Aggiungere un nuovo blog</h1>
-    <f:form action="save" object="{blog}" name="blog" additionalAttributes="{role:'form'}">
-        <div class="form-group">
-            <label>Titolo blog</label>
-            <f:form.textfield property="title" class="form-control" />
-        </div>
-        <div class="form-group">
-            <label>Descrizione blog</label>
-            <f:form.textarea property="description" class="form-control" />
-        </div>
-        <f:form.submit value="Crea il blog!" class="btn btn-primary" />
-    </f:form>
-</div>
+<f:layout name="default" />
+<f:section name="content">
+    <div class="container">
+        <f:render partial="Blog/Form" arguments="{intestazione:'Aggiungere un nuovo blog', azione:'add', messaggioinvio:'Crea il blog!', blog:blog}" />
+    </div>
+</f:section>

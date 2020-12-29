@@ -9,11 +9,11 @@ call_user_func(
             'Pluswerk.Simpleblog',
             'Bloglisting',
             [
-                'Blog' => 'show, create, save, display'
+                'Blog' => 'show, create, save, display, updateForm, update, deleteConfirm, delete'
             ],
             // non-cacheable actions
             [
-                'Blog' => 'show, create, save, display'
+                'Blog' => 'show, create, save, display, updateForm, update, deleteConfirm, delete'
             ]
         );
 

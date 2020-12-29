@@ -9,8 +9,8 @@ return [
     'DB' => [
         'database' => 'typo3b',
         'host' => '127.0.0.1',
-        'password' => 'root',
-        'port' => 3306,
+        'password' => 'rootpassword',
+        'port' => 3310,
         'username' => 'root',
     ],
     'EXT' => [

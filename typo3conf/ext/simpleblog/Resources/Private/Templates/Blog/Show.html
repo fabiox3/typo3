@@ -1,12 +1,25 @@
-<h1>I miei Blog</h1>
-<div class="container">
-    <ul class="list-group">
-    <f:for each="{blogs}" as="blog">
-        <li class="list-group-item">
-            {blog.title}
-            <f:link.action action="display" arguments="{blog:blog}" class="btn btn-xs pull-right">MOSTRA</f:link.action>
-        </li>
-    </f:for>
-    </ul>
-    <f:link.action action="create" class="btn btn-primary">Crea un nuovo blog</f:link.action>
-</div>
+<f:layout name="default" />
+<f:section name="content">
+    <h1>I miei Blog</h1>
+    <f:form action="list" additionalAttributes="{role:'form'}">
+        <div class="form-inline">
+            <div class="form-group">
+                <f:form.textfield name="search" value="{search}" class="form-control" />
+                <f:form.submit value="Cerca!" class="btn-xs btn-primary" />
+            </div>
+        </div>
+    </f:form>    
+    <div class="container col-md-12">
+        <ul class="list-group">
+        <f:for each="{blogs}" as="blog">
+            <li class="list-group-item">
+                {blog.title}
+                <f:link.action action="display" arguments="{blog:blog}" class="btn btn-xs pull-right">MOSTRA</f:link.action>
+                <f:link.action action="updateForm" arguments="{blog:blog}" class="btn btn-xs pull-right margin-right">MODIFICA</f:link.action>
+                <f:link.action action="deleteConfirm" arguments="{blog:blog}" class="btn btn-xs pull-right margin-right">ELIMINA</f:link.action>
+            </li>
+        </f:for>
+        </ul>
+        <f:link.action action="create" class="btn btn-primary">Crea un nuovo blog</f:link.action>
+    </div>
+</f:section>
