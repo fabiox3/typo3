@@ -307,6 +307,7 @@ return array(
     'PhpParser\\Unserializer' => $typo3InstallDir . 'typo3conf/ext/extension_builder/Resources/Private/PHP/PHP-Parser/lib/PhpParser/Unserializer.php',
     'PhpParser\\Unserializer\\XML' => $typo3InstallDir . 'typo3conf/ext/extension_builder/Resources/Private/PHP/PHP-Parser/lib/PhpParser/Unserializer/XML.php',
     'Pluswerk\\Simpleblog\\Controller\\BlogController' => $typo3InstallDir . 'typo3conf/ext/simpleblog/Classes/Controller/BlogController.php',
+    'Pluswerk\\Simpleblog\\Controller\\PostController' => $typo3InstallDir . 'typo3conf/ext/simpleblog/Classes/Controller/PostController.php',
     'Pluswerk\\Simpleblog\\Domain\\Model\\Author' => $typo3InstallDir . 'typo3conf/ext/simpleblog/Classes/Domain/Model/Author.php',
     'Pluswerk\\Simpleblog\\Domain\\Model\\Blog' => $typo3InstallDir . 'typo3conf/ext/simpleblog/Classes/Domain/Model/Blog.php',
     'Pluswerk\\Simpleblog\\Domain\\Model\\Comment' => $typo3InstallDir . 'typo3conf/ext/simpleblog/Classes/Domain/Model/Comment.php',
