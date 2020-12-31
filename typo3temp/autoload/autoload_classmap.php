@@ -315,4 +315,7 @@ return array(
     'Pluswerk\\Simpleblog\\Domain\\Model\\Tags' => $typo3InstallDir . 'typo3conf/ext/simpleblog/Classes/Domain/Model/Tags.php',
     'Pluswerk\\Simpleblog\\Domain\\Repository\\BlogRepository' => $typo3InstallDir . 'typo3conf/ext/simpleblog/Classes/Domain/Repository/BlogRepository.php',
     'Pluswerk\\Simpleblog\\Domain\\Repository\\PostRepository' => $typo3InstallDir . 'typo3conf/ext/simpleblog/Classes/Domain/Repository/PostRepository.php',
+    'Pluswerk\\Simpleblog\\Service\\GoogleAutocompleteApiService' => $typo3InstallDir . 'typo3conf/ext/simpleblog/Classes/Service/GoogleAutocompleteApiService.php',
+    'Pluswerk\\Simpleblog\\Validation\\Validator\\AutocompleteValidator' => $typo3InstallDir . 'typo3conf/ext/simpleblog/Classes/Validation/Validator/AutocompleteValidator.php',
+    'Pluswerk\\Simpleblog\\Validation\\Validator\\WordValidator' => $typo3InstallDir . 'typo3conf/ext/simpleblog/Classes/Validation/Validator/WordValidator.php',
 );
