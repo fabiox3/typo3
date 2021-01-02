@@ -9,14 +9,45 @@ plugin.tx_simpleblog_bloglisting {
     layoutRootPaths.1 = {$plugin.tx_simpleblog_bloglisting.view.layoutRootPath}
   }
   persistence {
-    storagePid = {$plugin.tx_simpleblog_bloglisting.persistence.storagePid}
+    #storagePid = {$plugin.tx_simpleblog_bloglisting.persistence.storagePid}
     #recursive = 1
+    storagePid = 48
+    recursive = 42
+    classes {
+      Pluswerk\Simpleblog\Domain\Model\Blog {
+        newRecordStoragePid = 49
+      }
+      Pluswerk\Simpleblog\Domain\Model\Post {
+        newRecordStoragePid = 50
+      }
+      Pluswerk\Simpleblog\Domain\Model\Comment {
+        newRecordStoragePid = 51
+      }
+      Pluswerk\Simpleblog\Domain\Model\Tags {
+        newRecordStoragePid = 52
+      }
+      Pluswerk\Simpleblog\Domain\Model\Author {
+        mapping {
+          tableName = fe_users
+          columns {
+            name.mapOnProperty = fullname
+          }
+        }
+      }
+    }
   }
   features {
     #skipDefaultArguments = 1
   }
   mvc {
     #callDefaultActionIfActionCantBeResolved = 1
+  }
+  settings {
+    loginpage = 55
+    blog {
+      max = 55
+    }
+
   }
 }
 

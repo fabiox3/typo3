@@ -24,6 +24,16 @@ class PostController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      */
     protected $postRepository;
 
+    public function initializeAction()
+    {
+        $action = $this->request->getControllerActionName();
+        if( $action != 'display' ) {
+            if( !$GLOBALS['TSFE']->fe_user->user['uid'] ) {
+                $this->redirect(null, null, null, null, $this->settings['loginpage']);
+            }
+        }    
+    }
+
     /**
      * @param \Pluswerk\Simpleblog\Domain\Repository\PostRepository $postRepository
      */
@@ -36,9 +46,37 @@ class PostController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      * @param \Pluswerk\Simpleblog\Domain\Model\Blog $blog
      * @param \Pluswerk\Simpleblog\Domain\Model\Post $post
      */
-    public function addFormAction(
+    public function createAction(
         \Pluswerk\Simpleblog\Domain\Model\Blog $blog,
         \Pluswerk\Simpleblog\Domain\Model\Post $post = null) 
+    {
+        $this->view->assign('blog', $blog);
+        $this->view->assign('post', $post);
+        $this->view->assign('tags', $this->objectManager->get('Pluswerk\\Simpleblog\\Domain\\Repository\\TagsRepository')->findAll());
+    }
+
+    /**
+     * @param \Pluswerk\Simpleblog\Domain\Model\Blog $blog
+     * @param \Pluswerk\Simpleblog\Domain\Model\Post $post
+     */    
+    public function saveAction(
+        \Pluswerk\Simpleblog\Domain\Model\Blog $blog,
+        \Pluswerk\Simpleblog\Domain\Model\Post $post)
+    {
+        $post->setPostdate(new \DateTime());
+        $post->setAuthor($this->objectManager->get('Pluswerk\\Simpleblog\\Domain\\Repository\\AuthorRepository')->findByUid($GLOBALS['TSFE']->fe_user->user['uid']));
+        $blog->addPost($post);
+        $this->objectManager->get('Pluswerk\\Simpleblog\\Domain\\Repository\\BlogRepository')->update($blog);
+        $this->redirect('show', 'Blog', null, array('blog'=>$blog));
+    }
+
+    /**
+     * @param \Pluswerk\Simpleblog\Domain\Model\Blog $blog
+     * @param \Pluswerk\Simpleblog\Domain\Model\Post $post
+     */      
+    public function displayAction(
+        \Pluswerk\Simpleblog\Domain\Model\Blog $blog,
+        \Pluswerk\Simpleblog\Domain\Model\Post $post)
     {
         $this->view->assign('blog', $blog);
         $this->view->assign('post', $post);
@@ -47,41 +85,52 @@ class PostController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     /**
      * @param \Pluswerk\Simpleblog\Domain\Model\Blog $blog
      * @param \Pluswerk\Simpleblog\Domain\Model\Post $post
-     */    
-    public function addAction(
+     */ 
+    public function updateFormAction(
         \Pluswerk\Simpleblog\Domain\Model\Blog $blog,
         \Pluswerk\Simpleblog\Domain\Model\Post $post)
     {
-        $post->setPostdate(new \DateTime());
+        $this->view->assign('blog', $blog);
+        $this->view->assign('post', $post);
+        $this->view->assign('tags', $this->objectManager->get('Pluswerk\\Simpleblog\\Domain\\Repository\\TagsRepository')->findAll());
+    }
 
-        $blog->addPost($post);
+    /**
+     * @param \Pluswerk\Simpleblog\Domain\Model\Blog $blog
+     * @param \Pluswerk\Simpleblog\Domain\Model\Post $post
+     */ 
+    public function updateAction(
+        \Pluswerk\Simpleblog\Domain\Model\Blog $blog,
+        \Pluswerk\Simpleblog\Domain\Model\Post $post)
+    {
+        $this->postRepository->update($post);
         $this->objectManager->get('Pluswerk\\Simpleblog\\Domain\\Repository\\BlogRepository')->update($blog);
-        $this->redirect('show', 'Blog', null, array('blog'=>$blog));
-    }
-
-    public function showAction()
-    {
-
-    }
-
-    public function updateFormAction()
-    {
-
-    }
-
-    public function updateAction()
-    {
-
+        $this->redirect('display', 'Post', null, array('blog'=>$blog, 'post'=>$post));
     }    
 
-    public function deleteConfirmAction()
+    /**
+     * @param \Pluswerk\Simpleblog\Domain\Model\Blog $blog
+     * @param \Pluswerk\Simpleblog\Domain\Model\Post $post
+     */     
+    public function deleteConfirmAction(
+        \Pluswerk\Simpleblog\Domain\Model\Blog $blog,
+        \Pluswerk\Simpleblog\Domain\Model\Post $post)
     {
-
+        $this->view->assign('blog', $blog);
+        $this->view->assign('post', $post);
     }  
 
-    public function deleteAction()
+    /**
+     * @param \Pluswerk\Simpleblog\Domain\Model\Blog $blog
+     * @param \Pluswerk\Simpleblog\Domain\Model\Post $post
+     */       
+    public function deleteAction(
+        \Pluswerk\Simpleblog\Domain\Model\Blog $blog,
+        \Pluswerk\Simpleblog\Domain\Model\Post $post)
     {
-
+        $blog->removePost($post);
+        $this->objectManager->get('Pluswerk\\Simpleblog\\Domain\\Repository\\BlogRepository')->update($blog);
+        $this->redirect('display', 'Blog', null, array('blog'=>$blog));
     }
 }
 

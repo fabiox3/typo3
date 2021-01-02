@@ -1,0 +1,14 @@
+<f:layout name="default" />
+<f:section name="content">
+    <div class="container-fluid">
+        <h1>Eliminare il post?</h1>
+        Vuoi veramente cancellare il post con il titolo <strong>{post.title}</strong>?
+        <br /><br />
+        <f:link.action action="display" class="btn btn-danger" arguments="{blog:blog, post:post}">
+            No, non eliminare!
+        </f:link.action>
+        <f:link.action action="delete" class="btn btn-success" arguments="{blog:blog, post:post}">
+            Si, certo, eliminalo!
+        </f:link.action>
+    </div>
+</f:section>

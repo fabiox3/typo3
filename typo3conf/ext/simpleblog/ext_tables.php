@@ -31,3 +31,5 @@ call_user_func(
     },
     $_EXTKEY
 );
+
+$GLOBALS['TCA']['fe_users']['ctrl']['label'] = 'name';

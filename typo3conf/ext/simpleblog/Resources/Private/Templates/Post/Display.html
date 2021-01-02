@@ -1,0 +1,22 @@
+<f:layout name="default" />
+<f:section name="content">
+    <dl class="dl-horizontal">
+        <dt>Titolo:</dt>
+        <dd>{post.title}</dd>
+        <dt>Data di creazione:</dt>
+        <dd><f:format.date format="d/m/Y">{post.postdate}</f:format.date> alle ore <f:format.date format="H:i">{post.postdate}</f:format.date></dd>
+        <dt>Contenuto:</dt>
+        <dd><f:format.nl2br>{post.content}</f:format.nl2br></dd>
+        <dt>Tags:</dt>
+        <dd>
+            <f:for each="{post.tags}" as="tag">
+                <span class="label label-default">{tag.tagvalue}</span>
+            </f:for>
+        </dd>
+        <dt>Autore:</dt>
+        <dd>{post.author.fullname} (Email: {post.author.email})</dd>
+    </dl>
+    <f:link.action action="show" controller="Blog" class="btn btn-primary">Torna all'elenco Blog</f:link.action>
+    <br><br>
+    <f:link.action action="display" controller="Blog" class="btn btn-primary" arguments="{blog:blog, post:post}">Torna all'elenco Post</f:link.action>    
+</f:section>

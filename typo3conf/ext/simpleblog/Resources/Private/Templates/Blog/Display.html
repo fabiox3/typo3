@@ -6,20 +6,23 @@
             <dt>Titolo blog:</dt>
             <dd>{blog.title}</dd>
             <dt>Descrizione blog:</dt>
-            <dd>{blog.description}</dd>
+            <dd><f:format.nl2br>{blog.description}</f:format.nl2br></dd>
         </dl>
         <f:if condition="{blog.posts}">
             <ul class="list-group">
                 <f:for each="{blog.posts}" as="post">
                     <li class="list-group-item">{post.title}
-                        <f:link.action action="deleteConfirm" controller="Post" arguments="{blog:blog, post:post}" class="btn btn-primary btn-xs pull-right">DEL</f:link.action>
-                        <f:link.action action="updateForm" controller="Post" arguments="{blog:blog, post:post}" class="btn btn-primary btn-xs pull-right margin-right">EDIT</f:link.action>
-                        <f:link.action action="show" controller="Post" arguments="{blog:blog, post:post}" class="btn btn-primary btn-xs pull-right margin-right">SHOW</f:link.action>
+                        <f:for each="{post.tags}" as="tag">
+                            <span class="label label-default">{tag.tagvalue}</span>
+                        </f:for>
+                        <f:link.action action="deleteConfirm" controller="Post" arguments="{blog:blog, post:post}" class="btn btn-xs pull-right">ELIMINA</f:link.action>
+                        <f:link.action action="updateForm" controller="Post" arguments="{blog:blog, post:post}" class="btn btn-xs pull-right margin-right">MODIFICA</f:link.action>
+                        <f:link.action action="display" controller="Post" arguments="{blog:blog, post:post}" class="btn btn-xs pull-right margin-right">MOSTRA</f:link.action>
                     </li>
                 </f:for>
             </ul>
         </f:if>
-        <f:link.action action="addForm" controller="Post" arguments="{blog:blog}" class="btn btn-primary">Aggiungi Post</f:link.action>
+        <f:link.action action="create" controller="Post" arguments="{blog:blog, post:post}" class="btn btn-primary">Aggiungi Post</f:link.action>
         <br><br>
         <f:link.action action="show" class="btn btn-primary">Torna all'elenco blog</f:link.action>
     </div>    

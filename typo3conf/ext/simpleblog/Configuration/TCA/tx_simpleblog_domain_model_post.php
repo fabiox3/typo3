@@ -158,17 +158,10 @@ return [
 	        'exclude' => false,
 	        'label' => 'LLL:EXT:simpleblog/Resources/Private/Language/locallang_db.xlf:tx_simpleblog_domain_model_post.author',
 	        'config' => [
-			    'type' => 'inline',
-			    'foreign_table' => 'tx_simpleblog_domain_model_author',
+			    'type' => 'select',
+			    'foreign_table' => 'fe_users',
 			    'minitems' => 0,
 			    'maxitems' => 1,
-			    'appearance' => [
-			        'collapseAll' => 0,
-			        'levelLinksPosition' => 'top',
-			        'showSynchronizationLink' => 1,
-			        'showPossibleLocalizationRecords' => 1,
-			        'showAllLocalizationLink' => 1
-			    ],
 			],
 	    ],
 	    'tags' => [
