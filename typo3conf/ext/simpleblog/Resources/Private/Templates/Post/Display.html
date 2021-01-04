@@ -16,7 +16,44 @@
         <dt>Autore:</dt>
         <dd>{post.author.fullname} (Email: {post.author.email})</dd>
     </dl>
-    <f:link.action action="show" controller="Blog" class="btn btn-primary">Torna all'elenco Blog</f:link.action>
+    <h3>Commenta</h3>
+    <f:form action="ajax" name="comment" object="{comment}" arguments="{post:post}">
+        <f:form.textarea property="comment" id="commentfield" />
+        <br />
+        <f:form.submit value="Invia commento" class="btn btn-primary btn-xs" id="commentsubmit" />
+    </f:form>
+    <br>Storico commenti<br>
+    <ul class="list-group" id="comments">
+        <f:for each="{post.comments}" as="comment" reverse="TRUE">
+            <li class="list-group-item">
+                {comment.comment}
+                <span class="text-muted">(<f:format.date format="Y-m-d H:i:s">{comment.commentdate}</f:format.date>)</span>
+            </li>
+        </f:for>
+    </ul>
+
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#commentsubmit').click(function(){
+                var ajaxURL = '<f:uri.action action="ajax" controller="Post" pageType="99" arguments="{post:post}" />';
+                var form = $('form');
+                $.post(ajaxURL, form.serialize(), function(response) {
+                    var items = [];
+                    $.each(response, function(key, val) {
+                        items.push('<li class="list-group-item">' + val.comment + ' <span class="text-muted">(' + val.commentdate.date + ')</span>' + '</li>');
+                    });
+                    $('#comments').html(items.reverse().join(''));
+                    $('#commentfield').val('');
+                });
+                return false;
+            });
+        });
+    </script>
+
+    <f:link.action action="show" controller="Blog" arguments="{blog:blog}" class="btn btn-primary">
+        Torna al Blog <strong>"{blog.title}"</strong>
+    </f:link.action>
     <br><br>
     <f:link.action action="display" controller="Blog" class="btn btn-primary" arguments="{blog:blog, post:post}">Torna all'elenco Post</f:link.action>    
 </f:section>
